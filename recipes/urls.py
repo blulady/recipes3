@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+# from django.views.generic import RedirectView #would you like to redirect the url to recipe?
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-]
+    path("recipe/", include("recipe.urls"))
+    # path("", RedirectView.as_view(url="recipe/", permanent=True)),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
