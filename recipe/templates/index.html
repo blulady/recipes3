@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% block title %}<title>Delicious Recipes Home</title>{% endblock %}
+  <h1>Delicious Recipes Home</h1>
+  <p>Welcome to Delicious Recipes, a website developed by <em>A Silly Lady</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>Delicious Recipes Has:</p>
+  <ul>
+    <li><strong>Diet Types:</strong> {{ diet_count }}</li>
+    <li><strong>Recipes:</strong> {{ recipe_count }}</li>
+  </ul>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1> {{ recipe.title }}</h1>
+<!--{% if recipe.origin != None %}  <p><strong> Origin of Recipe: </strong> {{recipe.origin}}{% endif %}</p> -->
+<!--  <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p> &lt;!&ndash; author detail link not yet defined &ndash;&gt;-->
+  <p><strong>Diet Type:</strong> {{ recipe.diet }}</p> <!--need an if more than one & a join statement see below -->
+<!-- {% if len(recipe.diet) == 1 %} {{recipe.diet}} {% else %}{{recipe.diet.all|join:','}}{% endif %}-->
+  <p><strong>Cooking Time:</strong> {{ recipe.cook_time }}</p>
+  <p><strong>Level of skill required</strong> {{ recipe.difficulty_level }}</p>
+  <p><strong>Directions:</strong> {{ recipe.directions }}</p>
+  <p><strong></strong> {{ recipe.ingredients.all|join:", " }}</p> <!-- need to list this -->
+<!--  <p><strong>Source:</strong> {{ recipe.origin }}</p> needs an if statement-->
+<!--  <p><strong></strong> {{ book.genre.all|join:", " }}</p>-->
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Ingredients</h4>
+
+    {% for ingredient in book.ingredients %}
+      <li>
+          {{ ingredient }}
+      </li>
+
+<!--      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">-->
+<!--        {{ copy.get_status_display }}-->
+<!--      </p>-->
+<!--      {% if copy.status != 'a' %}-->
+<!--        <p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>-->
+<!--      {% endif %}-->
+<!--      <p><strong>Imprint:</strong> {{ copy.imprint }}</p>-->
+<!--      <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>-->
+<!--    {% endfor %}-->
+<!--  </div>-->
+<!--{% endblock %}-->
