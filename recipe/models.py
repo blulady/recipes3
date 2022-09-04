@@ -34,11 +34,11 @@ class Recipe(models.Model):
     difficulty_level = models.CharField(
         max_length=20,
         choices=LEVEL,
-        blank=True,
+        blank=False,
         help_text="What level of skill does this recipe require?"
     )
     ingredients = models.ManyToManyField(Ingredients, help_text="add ingredient")
-    associated_recipe = models.ForeignKey('self', on_delete=models.SET_NULL, null=True)
+    associated_recipe = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
     origin = models.CharField(max_length=250, help_text="is there a source you'd like to cite for this recipe? "
                                                         "Enter a book name or link here")
 
@@ -48,4 +48,5 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         """returns url to access a detail record for a recipe"""
         return reverse("recipe-detail", args=[str(self.id)])
+
 

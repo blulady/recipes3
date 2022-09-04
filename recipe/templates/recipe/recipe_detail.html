@@ -4,7 +4,7 @@
   <h1> {{ recipe.title }}</h1>
 
   {% if  recipe.diet %}
-    <p><strong>Diet Type:</strong> {{ recipe.diet.all|join:', ' }}</p>
+    <p><strong>Diet Type{{ recipe.diet.all|pluralize}}:</strong> {{ recipe.diet.all|join:', ' }}</p>
   {% endif %}
 
   <p><strong>Cooking Time:</strong> {{ recipe.cook_time }}</p>
