@@ -38,7 +38,7 @@ class Recipe(models.Model):
         help_text="What level of skill does this recipe require?"
     )
     ingredients = models.ManyToManyField(Ingredients, help_text="add ingredient")
-    #associate_recipe = models.ForeignKey('Recipe')
+    associated_recipe = models.ForeignKey('self', on_delete=models.SET_NULL, null=True)
     origin = models.CharField(max_length=250, help_text="is there a source you'd like to cite for this recipe? "
                                                         "Enter a book name or link here")
 
