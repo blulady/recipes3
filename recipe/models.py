@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Diet(models.Model):
@@ -28,6 +29,7 @@ class Recipe(models.Model):
     who_entered = models.CharField(max_length=100, help_text="user name", blank=True, null=True)
     diet = models.ManyToManyField(Diet, blank=True)
     cook_time = models.CharField(max_length=50, help_text='total cooking time')
+    chef = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     directions = models.TextField()
     LEVEL = (
         ("Easy", "Easy"),
