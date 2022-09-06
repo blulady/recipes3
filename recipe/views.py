@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Diet, Ingredients, Recipe
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -23,3 +24,12 @@ class RecipeListView(generic.ListView):
 
 class RecipeDetailView(generic.DetailView):
     model = Recipe
+
+
+class RecipeByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Recipe
+    template_name = 'recipe/recipe_list_by_user.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Recipe.objects.filter(who_entered=self.request.user).order_by('title')

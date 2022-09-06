@@ -8,6 +8,10 @@ class Diet(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        """returns url to access a detail record for a recipe"""
+        return reverse("diet-detail", args=[str(self.id)])
+
 
 class Ingredients(models.Model):
     name = models.CharField(max_length=200, help_text='ingredient')
