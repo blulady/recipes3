@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Recipe by Diet</h1>
+  {% if diet_list %}
+  <ul>
+    {% for diet in diet_list %}
+      <li>
+        <a href="{{ diet.get_absolute_url }}">{{ diet.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Must be a mistake, there are no diets here. Enter some.</p>
+  {% endif %}
+{% endblock %}

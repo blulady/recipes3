@@ -1,0 +1,2 @@
+- add autodate to recipes model & organize recipe list view to show the latest recipe?
+- add some sort of rating method so people could vote on recipe & organize the list view to show the most popular 

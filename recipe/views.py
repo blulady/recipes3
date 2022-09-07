@@ -33,3 +33,13 @@ class RecipeByUserListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Recipe.objects.filter(who_entered=self.request.user).order_by('title')
+
+
+class DietListView(generic.ListView):
+    model = Diet
+    paginate_by = 10
+
+
+class DietDetailView(generic.DetailView):
+    model = Diet
+    
