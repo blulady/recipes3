@@ -2,6 +2,11 @@ from django.shortcuts import render
 from .models import Diet, Ingredients, Recipe
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import CreateRecipeModelForm
 
 
 def index(request):
@@ -42,4 +47,25 @@ class DietListView(generic.ListView):
 
 class DietDetailView(generic.DetailView):
     model = Diet
-    
+
+
+@login_required
+def create_recipe(request, pk):
+    """View function for creating a recipe by a user"""
+    new_recipe = get_object_or_404(Recipe, pk=pk)
+    # if this is a post request then process the form data
+    if request.method == 'POST':
+        # create a form instance & populated it w/date from the request binding
+        form = CreateRecipeModelForm(request.POST)
+        # check if the form is valid
+        if form.is_valid():
+            # process the data in form.cleaned data as required
+            # might need to confirm User is an actual User
+            new_recipe.save()
+            return HttpResponseRedirect(reverse('recipe-detail'))
+        else:
+            context = {
+                'form': form,
+                'new_recipe': new_recipe
+            }
+            return render(request, 'recipe/recipe_create_new.html', context)

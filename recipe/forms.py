@@ -13,3 +13,4 @@ class CreateRecipeModelForm(ModelForm):
                       'ingredients': _("add ingredients and measurements"),
                       "associated_recipe": _("does this recipe require another recipe (dressing, icing"),
                       'origin': _("credit your source (website, book, author)")}
+        # what of these need a clean method
