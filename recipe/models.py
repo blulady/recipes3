@@ -17,13 +17,6 @@ class Diet(models.Model):
         return reverse("diet-detail", args=[str(self.id)])
 
 
-class Ingredients(models.Model):
-    name = models.CharField(max_length=200, help_text='ingredient')
-
-    def __str__(self):
-        return self.name
-
-
 class Recipe(models.Model):
     class Meta:
         ordering = ['title']
@@ -46,7 +39,7 @@ class Recipe(models.Model):
         blank=False,
         help_text="What level of skill does this recipe require?"
     )
-    ingredients = models.ManyToManyField(Ingredients, help_text="add ingredient")
+    ingredients = models.TextField()
     associated_recipe = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
     origin = models.CharField(max_length=250, help_text="is there a source you'd like to cite for this recipe? "
                                                         "Enter a book name or link here")
