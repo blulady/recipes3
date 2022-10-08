@@ -72,8 +72,13 @@ class DietDetailView(generic.DetailView):
 #             return render(request, 'recipe/recipe_create_new.html', context)
 #LoginRequiredMixin,
 
-class AuthorCreate(CreateView, LoginRequiredMixin):
+class RecipeCreate(LoginRequiredMixin, CreateView):
     model = Recipe
     fields = ['title', 'diet', 'cook_time', 'chef', 'directions', 'difficulty_level',
               'ingredients', 'associated_recipe', 'origin']
-    template_name_suffix = '_create_new'
+
+
+class RecipeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Recipe
+    fields = ['title', 'diet', 'cook_time', 'chef', 'directions', 'difficulty_level',
+              'ingredients', 'associated_recipe', 'origin']
