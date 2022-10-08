@@ -4,21 +4,16 @@
   <h1> {{ recipe.title }}</h1>
 
   {% if  recipe.diet %}
+  <div style="margin-left:20px;margin-top:20px">
     <p><strong>Diet Type{{ recipe.diet.all|pluralize}}:</strong> {{ recipe.diet.all|join:', ' }}</p>
   {% endif %}
 
   <p><strong>Cooking Time:</strong> {{ recipe.cook_time }}</p>
   <p><strong>Level of skill required:</strong> {{ recipe.difficulty_level }}</p>
   <p><strong>Directions:</strong> {{ recipe.directions }}</p>
+  <p><strong>Ingredients:</strong><br> {{ recipe.ingredients }}</p>
 
-  <div style="margin-left:20px;margin-top:20px">
-    <h4>Ingredients</h4>
 
-    {% for ingredient in recipe.ingredients.all %}
-      <li>
-          {{ ingredient }}
-      </li>
-    {% endfor %}
   </div>
 {% endblock %}
 
