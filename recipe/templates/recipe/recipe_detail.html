@@ -12,6 +12,10 @@
   <p><strong>Level of skill required:</strong> {{ recipe.difficulty_level }}</p>
   <p><strong>Directions:</strong> {{ recipe.directions }}</p>
   <p><strong>Ingredients:</strong><br> {{ recipe.ingredients }}</p>
+  <hr>
+    <br>
+  <p><a href="{% url 'recipe-update' recipe.id %}">Update Recipe</a></p>
+  <p><a href="{% url 'recipe-delete' recipe.id %}">Delete Recipe</a></p>
 
 
   </div>

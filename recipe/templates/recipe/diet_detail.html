@@ -2,13 +2,15 @@
 
 {% block content %}
   <h1> {{ diet.name }}</h1>
-
-    {% for recipe in diet.recipe_set.all %}
-      <ul>
-        <a href="{{recipe.get_absolute_url}}"> {{ recipe }}</a>
-      </ul>
-    {% endfor %}
-
-
+    {% if diet.recipe_set.all %}
+      {% for recipe in diet.recipe_set.all %}
+        <ul>
+          <a href="{{recipe.get_absolute_url}}"> {{ recipe }}</a>
+        </ul>
+      {% endfor %}
+    {% else %}
+        <p>Looks like no one has provided recipes yet... </p>
+        <p> <a href="{%url 'recipe-create'%}"> Add some recipes</a><p>
+      {% endif %}
 
 {% endblock %}

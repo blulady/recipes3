@@ -11,5 +11,8 @@ urlpatterns = [
     path("diet/<int:pk>", views.DietDetailView.as_view(), name='diet-detail'),
     path("recipe/create/", views.RecipeCreate.as_view(), name='recipe-create'),
     path("recipe/<int:pk>/update/", views.RecipeUpdateView.as_view(), name='recipe-update'),
-    path("recipe/<int:pk>/delete/", views.RecipeDelete.as_view(), name='recipe-update'),
+    path("recipe/<int:pk>/delete/", views.RecipeDelete.as_view(), name='recipe-delete'),
+    path("diet/create/", views.DietCreate.as_view(), name='diet-create'),
+    path("diet/<int:pk>/update/", views.DietUpdate.as_view(), name='diet-update'),  # not using, add admin 2 site?
+
 ]

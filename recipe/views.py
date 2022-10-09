@@ -89,3 +89,13 @@ class RecipeUpdateView(LoginRequiredMixin, UpdateView):
 class RecipeDelete(DeleteView):
     model = Recipe
     success_url = reverse_lazy("recipes")
+
+
+class DietCreate(LoginRequiredMixin, CreateView):
+    model = Diet
+    fields = ['name']
+
+
+class DietUpdate(LoginRequiredMixin, CreateView):
+    model = Diet
+    fields = ['name']
