@@ -22,7 +22,8 @@
              <li>User: {{ user.get_username }}</li>
 
             <li><a href="{% url 'my-recipe' %}">My Recipes</a></li>
-
+            <li><a href="{% url 'recipe-create' %}">Create Recipes</a></li>
+            <li><a href="{% url 'diet-create' %}">Create Diets</a></li>
 
              <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
            {% else %}
