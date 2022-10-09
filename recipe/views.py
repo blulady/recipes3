@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import CreateRecipeModelForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -38,7 +38,7 @@ class RecipeByUserListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Recipe.objects.filter(who_entered=self.request.user).order_by('title')
+        return Recipe.objects.filter(chef=self.request.user).order_by('title')
 
 
 class DietListView(generic.ListView):
@@ -74,11 +74,18 @@ class DietDetailView(generic.DetailView):
 
 class RecipeCreate(LoginRequiredMixin, CreateView):
     model = Recipe
-    fields = ['title', 'diet', 'cook_time', 'chef', 'directions', 'difficulty_level',
+    fields = ['title', 'diet', 'cook_time', 'directions', 'difficulty_level',
               'ingredients', 'associated_recipe', 'origin']
+# TODO find a way to add a user (chef) to this form without the user filling it in
 
 
 class RecipeUpdateView(LoginRequiredMixin, UpdateView):
     model = Recipe
-    fields = ['title', 'diet', 'cook_time', 'chef', 'directions', 'difficulty_level',
+    fields = ['title', 'diet', 'cook_time', 'directions', 'difficulty_level',
               'ingredients', 'associated_recipe', 'origin']
+# TODO find a way to add a user (chef) to this form without the user filling it in
+
+
+class RecipeDelete(DeleteView):
+    model = Recipe
+    success_url = reverse_lazy("recipes")
