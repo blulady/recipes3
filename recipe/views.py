@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Diet, Recipe
 from django.views import generic
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
@@ -99,3 +100,16 @@ class DietCreate(LoginRequiredMixin, CreateView):
 class DietUpdate(LoginRequiredMixin, CreateView):
     model = Diet
     fields = ['name']
+
+
+def register_page(request):
+    if request.method != 'POST':
+        form = UserCreationForm()
+    else:
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    context = {'form': form}
+
+    return render(request, 'register.html', context)
