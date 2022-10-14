@@ -12,5 +12,6 @@
   </ul>
   {% else %}
     <p>There are no recipes.</p>
+    <p><a href="{% url 'recipe-create' %}">Add A Recipe</a> </p>
   {% endif %}
 {% endblock %}
