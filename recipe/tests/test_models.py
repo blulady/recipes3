@@ -68,6 +68,9 @@ class RecipeModelTest(TestCase, unittest.TestCase):
         self.assertEqual(recipe.get_absolute_url(), '/recipe/recipe/1')
 
     def test_name_is_name(self):
+        recipe = Recipe.objects.get(id=1)
+        expected_object_name = f'{recipe.title}'
+        self.assertEqual(str(recipe),expected_object_name )
 
 
 
