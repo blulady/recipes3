@@ -46,10 +46,10 @@ class RecipeModelTest(TestCase, unittest.TestCase):
         ['ingredients_label', 'ingredients', 'ingredients'],
         ['origin_label', 'origin', 'origin']
     ])
-    def test_label(self, name, a, b):
+    def test_label(self, name, f_label, label):
         recipe = Recipe.objects.get(id=1)
-        field_label = recipe._meta.get_field(a).verbose_name
-        self.assertEqual(field_label, b)
+        field_label = recipe._meta.get_field(f_label).verbose_name
+        self.assertEqual(field_label, label)
 
     @parameterized.expand([
         ['title_length', 'title', 250],
