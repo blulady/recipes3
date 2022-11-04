@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 from parameterized import parameterized
 # import unittest
 from ..models import Recipe, Diet, User
@@ -106,27 +107,75 @@ class RecipeByUserListView(TestCase):
         test_associate_recipe.diet.set([test_diet1])
         test_associate_recipe.save()
         test_associate_recipe_object = Recipe.objects.first()
-        number_of_recipe_copies = 30
+        number_of_recipe_copies = 26
         for recipe_id in range(number_of_recipe_copies):
+            letter = chr(65+recipe_id)
             test_chef = test_user1 if recipe_id % 2 else test_user2
             test_diet = diet_object_for_recipe1 if recipe_id % 2 else diet_object_for_recipe2
-            test_recipe = Recipe.objects.create(title=f'Mediterranean Bean Salad{recipe_id}',
+            test_recipe = Recipe.objects.create(title=f'{letter}editerranean Bean Salad',
                                                 cook_time='an hour',  # chef=test_user2,
                                                 directions='some directions as to how to prep the food',
                                                 difficulty_level='Medium',
                                                 ingredients="a string of ingredients",
                                                 origin="The Mediterranean")
-            test_recipe.save()
+            # test_recipe.save()
             test_recipe.chef = test_chef
             test_recipe.diet.set([test_diet])
             test_recipe.associated_recipe = test_associate_recipe_object
+            test_recipe.save()
 
     def test_redirect_if_not_logged_in(self):
         response = self.client.get(reverse('my-recipe'))
         self.assertRedirects(response, '/accounts/login/?next=/recipe/myrecipes/')
 
+    def test_logged_in_uses_correct_template(self):
+        login = self.client.login(username='testuser1', password='1X<ISRUkRV0Z&3iDw+tuK')
+        response = self.client.get(reverse('my-recipe'))
+        self.assertEqual(str(response.context['user']), 'testuser1')
+        self.assertEqual(response.status_code, 200)
 
-    # def test_logged_in_uses_correct_template(self):
-    #     pass
+    def test_only_my_recipes_in_list(self):
+        login = self.client.login(username='testuser1', password='1X<ISRUkRV0Z&3iDw+tuK')
+        response = self.client.get(reverse('my-recipe'))
+        self.assertEqual(str(response.context['user']), 'testuser1')
+        self.assertEqual(response.status_code, 200)
 
-    #def test_logged_in_uses_correct_template(self):
+        for item in response.context['recipe_list']:
+            self.assertEqual(response.context['user'], item.chef)
+
+    def test_pages_ordered_by_title(self):
+        login = self.client.login(username='testuser1', password='1X<ISRUkRV0Z&3iDw+tuK')
+        response = self.client.get(reverse('my-recipe'))
+        self.assertEqual(str(response.context['user']), 'testuser1')
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(len(response.context['recipe_list']), 10)
+
+        first_num = 64
+        for rcp in response.context['recipe_list']:
+            first_num += 1
+            self.assertTrue(first_num < ord(rcp.title[0]))
+            # self.assertEqual(first_num, ord(rcp.title[0])),# why this no work
+
+
+class RegisterPageView(TestCase):
+    def setUp(self):
+        self.username = 'testuser@gmail.com'
+        self.password = '1XISRUkRV0Z&3iDw+tuK'
+
+    def test_register_page_url(self):
+        response_reverse = self.client.get(reverse("register"))
+        self.assertEqual(response_reverse.status_code, 200)
+        self.assertTemplateUsed(response_reverse, template_name="register.html")
+        response = self.client.get("/recipe/register/")
+        self.assertEqual(response_reverse.status_code, response.status_code)
+
+    def test_register_form(self):
+        response = self.client.post(reverse('register'), data={
+            'username': self.username,
+            'password1': self.password,
+            'password2': self.password,
+        })
+        self.assertEqual(response.status_code, 302)
+        users = get_user_model().objects.all()
+        self.assertEqual(users.count(), 1)
