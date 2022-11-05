@@ -1,4 +1,4 @@
-{% extends "base_generic.html" %}
+{% extends "base_generic.html"%}
 
 {% block content %}
   <h1>Recipe by Diet</h1>
@@ -6,7 +6,7 @@
   <ul>
     {% for diet in diet_list %}
       <li>
-        <a href="{{ diet.get_absolute_url }}">{{ diet.name }}</a>
+        <h3><a href="{{ diet.get_absolute_url }}">{{ diet.name }}</a></h3>
       </li>
     {% endfor %}
   </ul>
