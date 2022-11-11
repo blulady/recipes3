@@ -5,7 +5,7 @@
     {% if diet.recipe_set.all %}
       {% for recipe in diet.recipe_set.all %}
         <ul>
-          <a href="{{recipe.get_absolute_url}}"> {{ recipe }}</a>
+          <a href="{{recipe.get_absolute_url}}"> {{ recipe }}</a> ({{ recipe.difficulty_level }} difficulty level, {{recipe.cook_time }}, {{ recipe.diet.all|join:', ' }}, )
         </ul>
       {% endfor %}
     {% else %}
