@@ -6,7 +6,8 @@
   <ul>
     {% for diet in diet_list %}
       <li>
-        <h3><a href="{{ diet.get_absolute_url }}">{{ diet.name }}</a></h3>
+        <h3><a href="{{ diet.get_absolute_url }}">{{ diet.name }} </a></h3>
+            <!--        TODO add number of recipes per diet-->
       </li>
     {% endfor %}
   </ul>

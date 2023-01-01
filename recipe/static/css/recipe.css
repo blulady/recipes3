@@ -2,10 +2,8 @@ h3 a {
     color: #C25100;
 }
 
-.sidebar-nav {
-    margin-top: 20px;
-    padding: 0;
-    list-style: none;
+p {
+
 }
 
 h1 {
@@ -22,7 +20,43 @@ h1 {
 }
 
 #recipes_pic {
-    background-image: url("/static/img/spices.jpg");
+    background-image: url("/static/img/veggies.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
 }
+
+ .nav-link:hover {
+  text-decoration: underline;
+}
+
+/*style="color: #d19b36" is how the navlinks are yellow see base_generic.html*/
+
+/*
+==========
+page
+==========
+*/
+
+/*body {
+    height: 100%
+}
+
+.full-height {
+  height: 100%;
+}*/
+
+
+/*
+==========
+Footer
+==========
+*/
+
+.page-footer {
+height: 4rem;
+}
+
+/*
+#page {
+    height: 100%; width: 100%
+}*/

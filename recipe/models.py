@@ -13,7 +13,7 @@ class Diet(models.Model):
         ordering = ["name"]
 
     def get_absolute_url(self):
-        """returns url to access a detail record for a recipe"""
+        """returns url to access a detail record for a diet"""
         return reverse("diet-detail", args=[str(self.id)])
 
 
