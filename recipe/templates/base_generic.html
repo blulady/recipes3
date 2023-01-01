@@ -75,14 +75,16 @@
 
     <!--    main-->
     <div class="container-md" >
-
-        <div class="full-height" style="background-color: #eee;" >
-             <!--style="background-color: #eee;"-->
-            <div> <!--<p class="text-center">-->
-                {% block content %}{% endblock %}
+        <div class="row">
+            <div class="column text-center">
+                <div class="full-height" style="background-color: #eee;" >
+                     <!--style="background-color: #eee;"-->
+                    <div> <!--<p class="text-center">-->
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
     <!-- end of main-->
     <!-- footer-->

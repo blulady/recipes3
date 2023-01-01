@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Recipe List</h1>
   {% if recipe_list %}
-  <ul>
+  <ul class="list-inline justify-content-center">
     {% for recipe in recipe_list %}
       <li>
        <h3> <a href="{{ recipe.get_absolute_url }}">{{ recipe.title }}</a> </h3> ({{ recipe.difficulty_level }} difficulty level, {{recipe.cook_time }}, {{ recipe.diet.all|join:', ' }}, )

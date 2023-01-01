@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Recipe by Diet</h1>
   {% if diet_list %}
-  <ul>
+  <ul class="list-inline justify-content-center">
     {% for diet in diet_list %}
       <li>
         <h3><a href="{{ diet.get_absolute_url }}">{{ diet.name }} </a></h3>
