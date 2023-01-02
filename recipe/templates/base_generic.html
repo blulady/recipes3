@@ -12,7 +12,7 @@
 <body id="recipes_pic">
 <!--Navbar-->
       {% block navbar %}
-    <div class="container-md">
+    <div class="container-flex"> <!--if you want to have shorter nav bar use <div class="container-md">-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">
                     <img src="/static/img/Logo.png" alt="" width="60" height="50">
@@ -77,7 +77,7 @@
     <div class="container-md" >
         <div class="row">
             <div class="column text-center">
-                <div class="full-height" style="background-color: #eee;" >
+                <div class="full-height" >
                      <!--style="background-color: #eee;"-->
                     <div> <!--<p class="text-center">-->
                         {% block content %}{% endblock %}
@@ -88,7 +88,7 @@
     </div>
     <!-- end of main-->
     <!-- footer-->
-    <footer class="fixed-bottom text-center bg-dark text-warning">
+    <footer class="footer fixed-bottom text-center bg-dark text-warning">
         {% now "Y" as current_year %}
         <p><span>&copy;{{ current_year }}</span>
             <span><img src="/static/img/Logo.png" alt="" width="25" height="15"></span>
